@@ -12,8 +12,6 @@ A simple music player built using JavaFX for the UI and JavaDB for storing music
 ## Technologies Used
 - JavaFX for the graphical user interface  
 - JavaDB (Apache Derby) for storing song metadata  
-- JLayer for MP3 playback support  
-- Maven or Gradle for dependency management  
 
 ## Installation
 1. Clone the repository:
