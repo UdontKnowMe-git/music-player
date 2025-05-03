@@ -2,17 +2,28 @@
 
 package player;
 
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 import player.db.DatabaseManager;
+import player.ui.PlayerView;
 
-public class Main {
-    public static void main(String[] args) {
-        // Connect to the database
+public class Main extends Application {
+    @Override
+    public void start(Stage primaryStage) {
         DatabaseManager.connect();
 
-        // Optionally, you can perform other operations here, like loading songs or playlists
-        System.out.println("Welcome to the music player!");
+        PlayerView view = new PlayerView();
+        Scene scene = new Scene(view.getView(), 600, 400);
 
-        // Close the database connection when done
-        DatabaseManager.disconnect();
+        primaryStage.setTitle("Music Player");
+        primaryStage.setScene(scene);
+        primaryStage.show();
+
+        primaryStage.setOnCloseRequest(event -> DatabaseManager.disconnect());
+    }
+
+    public static void main(String[] args) {
+        launch(args);
     }
 }
