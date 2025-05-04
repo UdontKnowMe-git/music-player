@@ -1,0 +1,19 @@
+{
+	"folders": [
+		{
+			"path": "../../../../java"
+		},
+		{
+			"path": "../../../../java vit class"
+		},
+		{
+			"path": "../../../../html and css"
+		},
+		{
+			"path": "../../../../programs"
+		}
+	],
+	"settings": {
+		"java.debug.settings.onBuildFailureProceed": true
+	}
+}
