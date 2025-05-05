@@ -1,4 +1,3 @@
-//TO COMPILETE: This code is a JavaFX controller for a playlist view in a media player application. It manages the display of songs in a ListView and handles user interactions such as selecting and playing songs.
 package player.ui;
 
 import javafx.fxml.FXML;
@@ -6,66 +5,61 @@ import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import player.db.Song; // Assuming you have a Song model
+import player.db.Song;
+
+import java.util.List;
 
 public class PlaylistView {
 
     @FXML
-    private ListView<String> playlistListView;  // ListView to display songs
+    private ListView<String> playlistListView; // ListView to display songs
 
-    private ObservableList<String> songTitles = FXCollections.observableArrayList();  // List of song titles
+    private ObservableList<String> songTitles = FXCollections.observableArrayList();
+    private List<Song> songs; // List of Song objects
 
-    private List<Song> songs;  // Assuming you have a Song model
-
-    // Initialize the PlaylistView and set the songs list
+    // Called during FXML initialization
+    @FXML
     public void initialize() {
-        playlistListView.setItems(songTitles);  // Set ListView's data source
-
-        // Optional: double-click to simulate playing the song
+        playlistListView.setItems(songTitles); // Bind ListView to songTitles list
         playlistListView.setOnMouseClicked(this::handleSongClick);
     }
 
-    // Method to set the playlist (song list)
+    // Set playlist and update UI
     public void setPlaylist(List<Song> songs) {
         this.songs = songs;
         songTitles.clear();
         for (Song song : songs) {
-            songTitles.add(song.getTitle());  // Assuming Song has a getTitle() method
+            songTitles.add(song.getTitle()); // Extract title
         }
     }
 
-    // Get the selected song title from ListView
+    // Get selected song title
     public String getSelectedSongTitle() {
         return playlistListView.getSelectionModel().getSelectedItem();
     }
 
-    // Get the selected song's index in the ListView
-    public int getSelectedIndex() {
-        return playlistListView.getSelectionModel().getSelectedIndex();
+    // Get selected song object
+    public Song getSelectedSong() {
+        int index = playlistListView.getSelectionModel().getSelectedIndex();
+        if (index >= 0 && index < songs.size()) {
+            return songs.get(index);
+        }
+        return null;
     }
 
-    // Clear the ListView selection
+    // Clear selection in the UI
     public void clearSelection() {
         playlistListView.getSelectionModel().clearSelection();
     }
 
-    // Method to handle song click (double-click to play)
+    // Handle song double-click to trigger playback
     private void handleSongClick(MouseEvent event) {
-        if (event.getClickCount() == 2) {  // Double-click action
-            String selected = playlistListView.getSelectionModel().getSelectedItem();
-            if (selected != null) {
-                System.out.println("Playing: " + selected);
-                // Trigger your media player or play functionality here
+        if (event.getClickCount() == 2) { // Double-click action
+            Song selectedSong = getSelectedSong();
+            if (selectedSong != null) {
+                System.out.println("Playing: " + selectedSong.getTitle());
+                // TODO: Integrate with media player playback system
             }
         }
     }
 }
-// <?xml version="1.0" encoding="UTF-8"?>
-
-// <?import javafx.scene.control.ListView?>
-// <?import javafx.scene.layout.AnchorPane?>
-
-// <AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="player.ui.PlaylistView">
-//     <ListView fx:id="playlistListView" layoutX="10" layoutY="10" prefHeight="200" prefWidth="300"/>
-// </AnchorPane>
-// // 
