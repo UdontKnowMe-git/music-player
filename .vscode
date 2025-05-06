@@ -1,0 +1,6 @@
+{
+  "java.project.referencedLibraries": [
+    "lib/sqlite-jdbc-3.49.1.0.jar",
+    "E:/Hari/javafx-sdk-24.0.1/lib/*.jar"
+  ]
+}
