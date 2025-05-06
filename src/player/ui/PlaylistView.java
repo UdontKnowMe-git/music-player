@@ -1,6 +1,7 @@
 //TO COMPILETE: This code is a JavaFX controller for a playlist view in a media player application. It manages the display of songs in a ListView and handles user interactions such as selecting and playing songs.
 package player.ui;
 
+import java.util.List;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
