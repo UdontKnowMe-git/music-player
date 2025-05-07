@@ -3,13 +3,15 @@ package player.controllers;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import player.db.Song;
-
-import java.io.File;
+import java.io.File; // Add this import
 
 public class PlayerController {
     private MediaPlayer mediaPlayer;
+    private Runnable onEndOfMedia;
 
-    public void playSong(Song song) {
+    public void playSong(Song song, Runnable onEnd) {
+        this.onEndOfMedia = onEnd;
+        
         if (mediaPlayer != null) {
             mediaPlayer.stop();
         }
@@ -17,28 +19,33 @@ public class PlayerController {
         try {
             Media media = new Media(new File(song.getFilepath()).toURI().toString());
             mediaPlayer = new MediaPlayer(media);
+            
+            if (onEndOfMedia != null) {
+                mediaPlayer.setOnEndOfMedia(onEndOfMedia);
+            }
+            
             mediaPlayer.play();
-            System.out.println("Playing: " + song.getTitle());
         } catch (Exception e) {
-            System.out.println("Error playing song: " + e.getMessage());
+            System.err.println("Error playing song: " + e.getMessage());
         }
     }
 
-    public void pause() {
+    public void togglePlayPause() {
         if (mediaPlayer != null) {
-            mediaPlayer.pause();
+            if (isPlaying()) {
+                mediaPlayer.pause();
+            } else {
+                mediaPlayer.play();
+            }
         }
     }
 
-    public void resume() {
-        if (mediaPlayer != null) {
-            mediaPlayer.play();
-        }
+    public boolean isPlaying() {
+        return mediaPlayer != null && 
+               mediaPlayer.getStatus() == MediaPlayer.Status.PLAYING;
     }
 
-    public void stop() {
-        if (mediaPlayer != null) {
-            mediaPlayer.stop();
-        }
+    public MediaPlayer getMediaPlayer() {
+        return mediaPlayer;
     }
 }
