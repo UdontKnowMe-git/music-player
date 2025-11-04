@@ -54,7 +54,3 @@ music-player/
 
 ## 📝 License
 MIT License - Feel free to modify and use!
-
----
-
-> **Note:** Replace `path/to/javafx-sdk` with your actual JavaFX SDK path (e.g. `E:/Hari/javafx-sdk-24.0.1`)
