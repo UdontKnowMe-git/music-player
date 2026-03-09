@@ -52,4 +52,3 @@ music-player/
 
 ## 📝 License
 MIT License - Feel free to modify and use!
-
