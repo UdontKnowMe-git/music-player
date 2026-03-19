@@ -51,4 +51,4 @@ music-player/
 ```
 
 ## 📝 License
-MIT License - Feel free to modify and use!
+MIT License - Feel free to modify and use
